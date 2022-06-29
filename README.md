@@ -27,7 +27,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-* [Download Python ext for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+* [Download Python](https://www.python.org/)
 * [Download Postgresql](https://www.postgresql.org/download/)
 
 ### Installation
