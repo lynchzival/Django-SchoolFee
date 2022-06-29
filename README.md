@@ -49,7 +49,7 @@ To get a local copy up and running follow these simple steps.
    ```sh
    venv\Scripts\activate
    ```
-   You might run into error, in that case visit this [stackoverflow question](https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system) for a fix.
+   You might run into "execution of scripts is disabled" error, in that case visit this [stackoverflow question](https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system) for a fix.
 
 5. Install packages
 
