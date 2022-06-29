@@ -1,2 +1,2 @@
-# Django School Fee MS
+# Django Fee MS
 Management system on school fee
