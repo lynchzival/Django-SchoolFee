@@ -1,0 +1,66 @@
+{% extends 'account.html' %}
+{% load static %}
+
+{% block style %}
+    <style>
+        .bg-login-image{
+            background: url("{% static 'img/login.jpg' %}");
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+    <div class="col-lg-6">
+        <div class="p-5">
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+            </div>
+            <form action="{% url 'account.login' %}" class="user" method="post" id="login">
+                {% csrf_token %}
+                {% for non_field_error in form.non_field_errors %}
+                    <div class="invalid-feedback d-block text-center mb-4">
+                        {{ non_field_error }}
+                    </div>
+                {% endfor %}
+                {% for fields in form %}
+                    <div class="form-group">
+                        {{ fields }}
+                        {% for error in fields.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox small">
+                        <input type="checkbox" name="remember" class="custom-control-input" id="customCheck">
+                        <label class="custom-control-label" for="customCheck">Remember
+                            Me</label>
+                    </div>
+                </div>
+                {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                {% endif %}
+                <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
+            </form>
+        </div>
+    </div>
+
+{#                <hr>#}
+{#                <a href="index.html" class="btn btn-google btn-user btn-block">#}
+{#                    <i class="fab fa-google fa-fw"></i> Login with Google#}
+{#                </a>#}
+{#                <a href="index.html" class="btn btn-facebook btn-user btn-block">#}
+{#                    <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook#}
+{#                </a>#}
+
+{#            <hr>#}
+{#            <div class="text-center">#}
+{#                <a class="small" href="forgot-password.html">Forgot Password?</a>#}
+{#            </div>#}
+{#            <div class="text-center">#}
+{#                <a class="small" href="register.html">Create an Account!</a>#}
+{#            </div>#}
+{% endblock %}

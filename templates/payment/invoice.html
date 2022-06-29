@@ -1,0 +1,55 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block heading %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <a href="{% url 'payment.index' %}" class="btn btn-danger btn-icon-split btn-sm">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-circle-left"></i>
+            </span>
+            <span class="text">Back</span>
+        </a>
+
+        <a href="javascript:printInvoice()" class="btn btn-primary btn-icon-split btn-sm">
+            <span class="icon text-white-50">
+                <i class="fas fa-save"></i>
+            </span>
+            <span class="text">Print</span>
+        </a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <!-- Area Chart -->
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary text-uppercase">Payment Invoice</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body" id="invoice">
+                    {% include "payment/invoicebody.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            let total = 0;
+            let total_payable = parseFloat($('#total_payable').text().replace( /^\D+/g, ''));
+
+            $('.pay_history').each(function () {
+                total += parseFloat($(this).text().replace( /^\D+/g, ''));
+            });
+            $('#total_paid').append(total);
+            $('#balance').append(total_payable - total);
+        });
+    </script>
+{% endblock %}

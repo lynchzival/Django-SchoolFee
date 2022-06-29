@@ -1,0 +1,63 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static "vendor/datatables/dataTables.bootstrap4.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/timeline.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block heading %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">
+            <i class="fas fa-fw fa-file-alt"></i>
+        </h1>
+    </div>
+    {% include "messages.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary text-uppercase">Payment Activity</h6>
+                </div>
+
+                <div class="card-body">
+
+                    <div id="content">
+                        <ul class="timeline">
+                            {% for pay_action in payment_activity %}
+                                <li class="event" data-date="{{ pay_action.created|date:"M d, Y" }}">
+                                    <h3>{{ pay_action.created|date:"f A" }}</h3>
+                                    <small class="text-capitalize font-weight-bold text-primary">
+                                        {{ pay_action.sender.username }}
+                                        {{ pay_action.verb }}
+                                        <a href="{% url 'payment.invoice' pid=pay_action.target_id %}" class="font-weight-bold" target="_blank">
+                                            #{{ pay_action.target_id }}
+                                        </a>
+                                    </small>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static "vendor/datatables/jquery.dataTables.min.js" %}"></script>
+    <script src="{% static "vendor/datatables/dataTables.bootstrap4.min.js" %}"></script>
+    <script src="{% static "js/demo/datatables-demo.js" %}"></script>
+    <script>
+        $('#dataTable').dataTable( {
+          "columnDefs": [
+            { "width": "20%", "targets": 3 }
+          ],
+          "order": [[ 0, "desc" ]]
+        });
+    </script>
+{% endblock %}

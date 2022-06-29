@@ -1,0 +1,47 @@
+{% extends 'master.html' %}
+
+{% block heading %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <a href="{% url 'index' %}" class="btn btn-danger btn-icon-split btn-sm">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-circle-left"></i>
+            </span>
+            <span class="text">Back</span>
+        </a>
+
+        <a href="{% url 'account.profile.edit' %}" class="btn btn-primary btn-icon-split btn-sm">
+            <span class="icon text-white-50">
+                <i class="fas fa-save"></i>
+            </span>
+            <span class="text">Edit</span>
+        </a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <!-- Area Chart -->
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary text-uppercase">
+                        {% if user.is_superuser %}Admin{% else %}General{% endif %} Profile
+                    </h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="text-center">
+                        <img src="https://avatars.dicebear.com/api/initials/{{ user.username }}.svg?chars=1" alt="profile" class="img-profile rounded-circle mb-4" height="120px" width="120px" />
+                        <h1 class="display-3 text-uppercase">{{ user.username }}</h1>
+                        <p class="text-uppercase">
+                            {{ user.first_name }} {{ user.last_name }}
+                        </p>
+                        <small class="font-weight-bold text-primary">{{ user.email }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

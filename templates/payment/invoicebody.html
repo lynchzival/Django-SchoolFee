@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Invoice</title>
+
+		<style>
+            .invoice-box {
+                /* max-width: 800px; */
+                margin: auto;
+                /* padding: 30px; */
+                border: 1px solid #eee;
+                /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); */
+                font-size: 16px;
+                line-height: 24px;
+                font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+                color: #555;
+            }
+
+            .invoice-box table {
+                width: 100%;
+                line-height: inherit;
+                text-align: left;
+            }
+
+            .invoice-box table td {
+                padding: 5px;
+                vertical-align: top;
+            }
+
+            .invoice-box table tr td:nth-child(2) {
+                text-align: right;
+            }
+
+            .invoice-box table tr.top table td {
+                padding-bottom: 20px;
+            }
+
+            .invoice-box table tr.top table td.title {
+                font-size: 45px;
+                line-height: 45px;
+                color: #333;
+            }
+
+            .invoice-box table tr.information table td {
+                padding-bottom: 40px;
+            }
+
+            .invoice-box table tr.heading td {
+                background: #eee;
+                border-bottom: 1px solid #ddd;
+                font-weight: bold;
+            }
+
+            .invoice-box table tr.details td {
+                padding-bottom: 20px;
+            }
+
+            .invoice-box table tr.item td {
+                border-bottom: 1px solid #eee;
+            }
+
+            .invoice-box table tr.item.last td {
+                border-bottom: none;
+            }
+
+            .invoice-box table tr.total td:nth-child(2) {
+                /* border-top: 2px solid #eee; */
+                font-weight: bold;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .invoice-box table tr.top table td {
+                    width: 100%;
+                    display: block;
+                    text-align: center;
+                }
+
+                .invoice-box table tr.information table td {
+                    width: 100%;
+                    display: block;
+                    text-align: center;
+                }
+            }
+
+            /** RTL **/
+            .invoice-box.rtl {
+                direction: rtl;
+                font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            }
+
+            .invoice-box.rtl table {
+                text-align: right;
+            }
+
+            .invoice-box.rtl table tr td:nth-child(2) {
+                text-align: left;
+            }
+		</style>
+	</head>
+
+	<body>
+        <div class="invoice-box">
+            <table cellpadding="0" cellspacing="0">
+                <tr class="top">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td class="title">
+                                    <h3 style="padding: 0; margin: 5px 0;">Invoice</h3>
+                                </td>
+
+                                <td>
+                                    Invoice: #{{ pay_current.id }}<br />
+                                    Enroll: #{{ pay_current.enroll_id_id }} <br />
+                                    Receptionist: <span class="text-capitalize">{{ pay_current.created_by }}</span> <br />
+                                    {{ pay_current.date_created }}<br />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr class="information">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td>
+                                    Course: {{ pay_current.enroll_id.course_id.name }} <br />
+                                    Level: {{ pay_current.enroll_id.course_id.level }} <br />
+                                    Description: {{ pay_current.enroll_id.course_id.course_desc }} <br />
+                                </td>
+
+                                <td>
+                                    {{ pay_current.enroll_id.student_id }}<br />
+                                    {{ pay_current.enroll_id.student_id.contact }}<br />
+                                    {{ pay_current.enroll_id.student_id.email }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr class="heading">
+                    <td>Fee(s)</td>
+
+                    <td>Amount</td>
+                </tr>
+
+                {% for fee in fees %}
+                    <tr class="details">
+                        <td>{{ fee.fee_desc }}</td>
+
+                        <td>${{ fee.amount }}</td>
+                    </tr>
+                {% endfor %}
+
+                <tr class="heading">
+                    <td>Date</td>
+
+                    <td>Amount</td>
+                </tr>
+
+                {% for payment in pay_history %}
+                    <tr class="details">
+                        <td>{{ payment.date_created }}</td>
+
+                        <td class="pay_history">${{ payment.amount }}</td>
+                    </tr>
+                {% endfor %}
+
+                <tr class="total">
+                    <td></td>
+
+                    <td id="total_paid">Total: $</td>
+                </tr>
+                <tr class="total">
+                    <td></td>
+
+                    <td id="total_payable">Total Payable: ${{ pay_current.enroll_id.total_fee }}</td>
+                </tr>
+                <tr class="total">
+                    <td></td>
+
+                    <td id="balance">Balance: $</td>
+                </tr>
+                <tr class="d-block mt-4">
+                    <td class="text-monospace">{{ pay_current.remarks }}</td>
+                </tr>
+            </table>
+        </div>
+	</body>
+</html>
