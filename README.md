@@ -83,9 +83,9 @@ To get a local copy up and running follow these simple steps.
    
 10. Run server
 
-   ```sh
-   python manage.py runserver
-   ```
+    ```sh
+    python manage.py runserver
+    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
