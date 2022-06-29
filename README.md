@@ -69,6 +69,23 @@ To get a local copy up and running follow these simple steps.
    ```sh
    python manage.py createsuperuser
    ```
+   
+9. Generate secret key
+
+   ```sh
+   python manage.py shell
+   ```
+   ```sh
+   from django.core.management.utils import get_random_secret_key
+   print(get_random_secret_key())
+   ```
+   Assign the value to SECRET_KEY = '' variable inside setting.py file
+   
+10. Run server
+
+   ```sh
+   python manage.py runserver
+   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
