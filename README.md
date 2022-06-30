@@ -38,7 +38,7 @@ To get a local copy up and running follow these simple steps.
    git clone https://github.com/lynchzival/Django-SchoolMSFee.git
    ```
    
-2. Extract vendor folder in static folder
+2. Extract compressed vendor folder in static folder
 3. Create venv inside the project folder
 
    ```sh
