@@ -35,7 +35,7 @@ To get a local copy up and running follow these simple steps.
 1. Clone the repo
 
    ```sh
-   git clone https://github.com/lynchzival/Django-SchoolMSFee.git
+   git clone https://github.com/lynchzival/Django-SchoolFee.git
    ```
    
 2. Extract compressed vendor folder in static folder
