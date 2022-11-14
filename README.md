@@ -58,28 +58,29 @@ To get a local copy up and running follow these simple steps.
    ```
  
 6. Config database in setting.py located in school folder
-7. Migration
+
+7. Generate secret key
 
    ```sh
-   python manage.py migrate
-   ```
-   
-8. Create superuser
-
-   ```sh
-   python manage.py createsuperuser
-   ```
-   
-9. Generate secret key
-
-   ```sh
-   python manage.py shell
+   python
    ```
    ```sh
    from django.core.management.utils import get_random_secret_key
    print(get_random_secret_key())
    ```
    Assign the value to SECRET_KEY = '' variable inside setting.py file
+   
+8. Migration
+
+   ```sh
+   python manage.py migrate
+   ```
+   
+9. Create superuser
+
+   ```sh
+   python manage.py createsuperuser
+   ```
    
 10. Run server
 
